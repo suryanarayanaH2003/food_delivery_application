@@ -1,30 +1,35 @@
-import React, { useState } from 'react'
-import './Navbar.css'
-import { assets } from '../../assets/assets'
+import React, { useState } from 'react';
+import './Navbar.css';
+import { assets } from '../../assets/assets';
+import SignUpCard from '../signupcard';
 
-const Navebar = () => {
-
-  const [menu,setMenu] = useState("home");
+const Navbar = () => {
+  const [menu, setMenu] = useState("home");
+  const [showSignUp, setShowSignUp] = useState(false); // State to control the visibility of the sign-up card
 
   return (
-    <div className='navbar'>
-      <img src={assets.logo} alt="" className='logo' />
-      <ul className='navbar-menu'>
-        <li onClick = {()=> setMenu("home")} className={menu==="home"?"active":""}>home</li>
-        <li onClick = {()=> setMenu("menu")} className={menu==="menu"?"active":""}>menu</li>
-        <li onClick = {()=> setMenu("mobile-app")} className={menu==="mobile-app"?"active":""}>mobile app</li>
-        <li onClick = {()=> setMenu("contact-us")} className={menu==="contact-us"?"active":""}>contact us</li>
-      </ul>
-      <div className="navbar-right">
-        <img src={assets.search_icon} alt="" />
-        <div className="navbar-search-icon">
-          <img src={assets.basket_icon} alt="" />
-          <div className="dot"></div>
+    <div className='tomato'>
+      <div className='navbar'>
+        <img src={assets.logo} alt="" className='logo' />
+        <ul className='navbar-menu'>
+          <li onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>home</li>
+          <li onClick={() => setMenu("menu")} className={menu === "menu" ? "active" : ""}>menu</li>
+          <li onClick={() => setMenu("mobile-app")} className={menu === "mobile-app" ? "active" : ""}>mobile app</li>
+          <li onClick={() => setMenu("contact-us")} className={menu === "contact-us" ? "active" : ""}>contact us</li>
+        </ul>
+        <div className="navbar-right">
+          <img src={assets.search_icon} alt="" />
+          <div className="navbar-search-icon">
+            <img src={assets.basket_icon} alt="" />
+            <div className="dot"></div>
+          </div>
+          <button onClick={() => setShowSignUp(true)}>sign in</button>
         </div>
-        <button>sign in</button>
       </div>
+      {/* Render the SignUpCard component if showSignUp is true */}
+      {showSignUp && <SignUpCard onClose={() => setShowSignUp(false)} />}
     </div>
-  )
-}
+  );
+};
 
-export default Navebar
+export default Navbar;
